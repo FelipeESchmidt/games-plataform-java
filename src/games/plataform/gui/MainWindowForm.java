@@ -1,14 +1,12 @@
 package games.plataform.gui;
 
-import games.plataform.connection.DataBase;
+import games.plataform.utils.DbGlobal;
 
 public class MainWindowForm extends javax.swing.JFrame {
 
-    private DataBase db;
-
     public MainWindowForm() {
         initComponents();
-        db = new DataBase();
+        DbGlobal.generateDb();
     }
 
     @SuppressWarnings("unchecked")
@@ -148,6 +146,7 @@ public class MainWindowForm extends javax.swing.JFrame {
     }//GEN-LAST:event_storeMenuItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Store;
     private javax.swing.JMenuItem clientsWithGamesMenuItem;
     private javax.swing.JMenu gamesMenu;
     private javax.swing.JMenuItem gamesMenuItem;
