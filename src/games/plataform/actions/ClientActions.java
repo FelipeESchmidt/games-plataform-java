@@ -10,10 +10,9 @@ import java.sql.SQLException;
 
 public class ClientActions {
 
-    public static void buyOneGame(Client client, Game game, Connection dbConnection) {
+    public static String buyOneGame(Client client, Game game, Connection dbConnection) {
         if (client.getBalance() < game.getPrice()) {
-            System.out.println("Cliente não tem saldo suficiente para compra");
-            return;
+            return ("Cliente não tem saldo suficiente para compra");
         }
         try{
             dbConnection.setAutoCommit(false);
@@ -30,9 +29,9 @@ public class ClientActions {
             balancePdStt.close();
             buyPdStt.close();
             
-            System.out.println("Compra Finalizada");
+            return ("Compra Finalizada");
         } catch(SQLException ex) {
-            System.out.println("Erro em: " + ex.getMessage());
+            return ("Erro em: " + ex.getMessage());
         }
     }
 
