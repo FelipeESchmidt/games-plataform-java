@@ -11,6 +11,12 @@ import java.util.Date;
 
 public class GamesFitter {
     
+    /**
+     * Get all Games registered as ArrayList
+     *
+     * @param connection database Connection
+     * @return an ArrayList with all Games
+     */
     public static ArrayList<Game> getAllGames(Connection connection) throws SQLException {
         ArrayList<Game> allGames = new ArrayList<>();
         

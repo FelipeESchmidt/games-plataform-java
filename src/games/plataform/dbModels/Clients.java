@@ -34,10 +34,17 @@ public class Clients {
         return getClientsWithGames().concat(" WHERE client.id = " + clientId);
     }
     
+    /**
+     * Get the PreparedStatement to decrease client balance
+     *
+     * @param clientId client id to decrease balance
+     * @param gamePrice game price
+     * @param dbConnection database Connection
+     * @return PreparedStatement to decrease client balance
+     */
     public static PreparedStatement getClientBalanceDecreaseStatement(int clientId, float gamePrice, Connection dbConnection) throws SQLException{
         PreparedStatement pstmt = dbConnection.prepareStatement("UPDATE client SET balance = balance - ? WHERE id = ?");
 
-        // Setando o valor ao parâmetro 
         pstmt.setFloat(1, gamePrice);
         pstmt.setInt(2, clientId);
         

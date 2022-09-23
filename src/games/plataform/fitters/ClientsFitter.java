@@ -10,6 +10,12 @@ import java.util.ArrayList;
 
 public class ClientsFitter {
     
+    /**
+     * Get all Clients registered as ArrayList
+     *
+     * @param connection database Connection
+     * @return an ArrayList with all Clients
+     */
     public static ArrayList<Client> getAllClients(Connection connection) throws SQLException {
         ArrayList<Client> allClients = new ArrayList<>();
         
