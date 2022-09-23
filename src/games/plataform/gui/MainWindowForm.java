@@ -19,6 +19,7 @@ public class MainWindowForm extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         gamesMenu = new javax.swing.JMenu();
         gamesMenuItem = new javax.swing.JMenuItem();
+        storeMenuItem = new javax.swing.JMenuItem();
         publishersMenu = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         userMenu = new javax.swing.JMenu();
@@ -50,6 +51,14 @@ public class MainWindowForm extends javax.swing.JFrame {
             }
         });
         gamesMenu.add(gamesMenuItem);
+
+        storeMenuItem.setText("Store");
+        storeMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                storeMenuItemActionPerformed(evt);
+            }
+        });
+        gamesMenu.add(storeMenuItem);
 
         menuBar.add(gamesMenu);
 
@@ -131,6 +140,13 @@ public class MainWindowForm extends javax.swing.JFrame {
         clientsWithGamesListForm.setVisible(true);
     }//GEN-LAST:event_clientsWithGamesMenuItemActionPerformed
 
+    private void storeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeMenuItemActionPerformed
+        StoreForm storeForm = new StoreForm();
+        mainPanel.add(storeForm);
+        mainPanel.setVisible(true);
+        storeForm.setVisible(true);
+    }//GEN-LAST:event_storeMenuItemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem clientsWithGamesMenuItem;
     private javax.swing.JMenu gamesMenu;
@@ -140,6 +156,7 @@ public class MainWindowForm extends javax.swing.JFrame {
     private javax.swing.JDesktopPane mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu publishersMenu;
+    private javax.swing.JMenuItem storeMenuItem;
     private javax.swing.JMenu userMenu;
     // End of variables declaration//GEN-END:variables
 
