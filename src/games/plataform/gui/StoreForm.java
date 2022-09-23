@@ -6,6 +6,7 @@ import games.plataform.fitters.ClientsFitter;
 import games.plataform.fitters.GamesFitter;
 import games.plataform.models.Client;
 import games.plataform.models.Game;
+import games.plataform.utils.DbGlobal;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class StoreForm extends javax.swing.JInternalFrame {
     public StoreForm() {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         try{
-            db = new DataBase();
+            db = DbGlobal.getDb();
             initComponents();
             populateComboBoxes();
         }catch(IllegalStateException e){
