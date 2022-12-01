@@ -5,7 +5,9 @@ import games.platform.crud.gui.GameForm;
 import games.platform.crud.gui.PublisherForm;
 import games.platform.models.Client;
 import games.platform.models.Game;
+import games.platform.models.User;
 import games.platform.models.Publisher;
+import games.platform.utils.UserConnected;
 import games.platform.utils.DbGlobal;
 import games.platform.xml.gui.AddCashFromXMLForm;
 import games.platform.utils.LoggerGlobal;
@@ -13,10 +15,17 @@ import games.platform.xml.gui.BuysToXMLForm;
 
 public class MainWindowForm extends javax.swing.JFrame {
 
+    private User userLogged;
+
     public MainWindowForm() {
         initComponents();
         LoggerGlobal.generateLogger();
         DbGlobal.generateDb();
+        boolean hasUserLogged = UserConnected.hasUserConnected();
+        if (hasUserLogged) {
+            userLogged = UserConnected.getUser();
+            showAvailableItens();
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -239,6 +248,13 @@ public class MainWindowForm extends javax.swing.JFrame {
         mainPanel.setVisible(true);
         addCashFromXMLForm.setVisible(true);
     }//GEN-LAST:event_addCashFromFileMenuActionPerformed
+
+    public void showAvailableItens() {
+        if (userLogged.isIsAdm()) {
+            // ADM itens
+        }
+        // Normal itens
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem addCashFromFileMenu;
