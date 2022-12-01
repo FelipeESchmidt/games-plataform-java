@@ -4,14 +4,16 @@ public class User {
     
     private final int id;
     private String username;
-    private int password;
+    private String password;
     private boolean is_adm;
+    private final int client_id;
 
-    public User(int id, String username, int password, boolean is_adm) {
+    public User(int id, String username, String password, boolean is_adm, int client_id) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.is_adm = is_adm;
+        this.client_id = client_id;
     }
 
     /**
@@ -46,7 +48,7 @@ public class User {
      *
      * @return the value of password
      */
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
     
@@ -55,7 +57,7 @@ public class User {
      *
      * @param password the value of password
      */
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -64,7 +66,7 @@ public class User {
      *
      * @return the value of is_adm
      */
-    public boolean isIsAdm() {
+    public boolean isAdm() {
         return is_adm;
     }
 
@@ -77,5 +79,12 @@ public class User {
         this.is_adm = is_adm;
     }
     
-    
+    /**
+     * Get the value of client_id
+     *
+     * @return the value of client_id
+     */
+    public int getClientId() {
+        return client_id;
+    }
 }

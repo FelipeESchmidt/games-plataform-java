@@ -2,4 +2,4 @@
 **/build/*
 /dist/
 /nbproject/private/
-/logs/all-logs.txt
+/logs/all-logs*

@@ -13,7 +13,7 @@ create table client (
 create table user (
 	id INT NOT NULL	auto_increment,
 	username  VARCHAR(50) not null,
-  password int not null,
+  password VARCHAR(255) not null,
   client_id int not null,
   is_adm boolean DEFAULT 0,
     PRIMARY KEY(id),
@@ -71,26 +71,26 @@ VALUES
 
 INSERT INTO user (username, password, client_id)
 VALUES
-  ("Felipe",12345,1),
-  ("Dionatan",54321,2),
-  ("Rogers",90856,3),
-  ("Best",29716,4),
-  ("Ruiz",54091,5),
-  ("Camacho",80969,6),
-  ("Byrd",43118,7),
-  ("Thompson",54059,8),
-  ("Mcbride",27638,9),
-  ("Mccray",18280,10),
-  ("Burke",63263,11),
-  ("Vaughan",69861,12),
-  ("Clements",79914,13),
-  ("Abbott",95958,14),
-  ("French",45446,15),
-  ("Chandler",69699,16),
-  ("Donaldson",74789,17),
-  ("Lynn",95898,18),
-  ("Alvarado",96107,19),
-  ("Hale",41275,20);
+  ("Felipe","12345",1),
+  ("Dionatan","54321",2),
+  ("Rogers","90856",3),
+  ("Best","29716",4),
+  ("Ruiz","54091",5),
+  ("Camacho","80969",6),
+  ("Byrd","43118",7),
+  ("Thompson","54059",8),
+  ("Mcbride","27638",9),
+  ("Mccray","18280",10),
+  ("Burke","63263",11),
+  ("Vaughan","69861",12),
+  ("Clements","79914",13),
+  ("Abbott","95958",14),
+  ("French","45446",15),
+  ("Chandler","69699",16),
+  ("Donaldson","74789",17),
+  ("Lynn","95898",18),
+  ("Alvarado","96107",19),
+  ("Hale","41275",20);
 
 UPDATE user SET is_adm = 1 WHERE id in (1, 2);
 

@@ -8,9 +8,7 @@ import games.platform.models.Game;
 import games.platform.models.User;
 import games.platform.models.Publisher;
 import games.platform.utils.UserConnected;
-import games.platform.utils.DbGlobal;
 import games.platform.xml.gui.AddCashFromXMLForm;
-import games.platform.utils.LoggerGlobal;
 import games.platform.xml.gui.BuysToXMLForm;
 
 public class MainWindowForm extends javax.swing.JFrame {
@@ -19,13 +17,11 @@ public class MainWindowForm extends javax.swing.JFrame {
 
     public MainWindowForm() {
         initComponents();
-        LoggerGlobal.generateLogger();
-        DbGlobal.generateDb();
         boolean hasUserLogged = UserConnected.hasUserConnected();
-        if (hasUserLogged) {
-            userLogged = UserConnected.getUser();
-            showAvailableItens();
+        if (!hasUserLogged) {
+            System.exit(0);
         }
+        userLoggedActions();
     }
 
     @SuppressWarnings("unchecked")
@@ -33,6 +29,8 @@ public class MainWindowForm extends javax.swing.JFrame {
     private void initComponents() {
 
         mainPanel = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
+        usernameLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         gamesMenu = new javax.swing.JMenu();
         gamesMenuItem = new javax.swing.JMenuItem();
@@ -53,15 +51,30 @@ public class MainWindowForm extends javax.swing.JFrame {
         setTitle("Plataforma de jogos");
         setResizable(false);
 
+        jLabel1.setText("Usuário logado:");
+
+        mainPanel.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mainPanel.setLayer(usernameLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(479, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 509, Short.MAX_VALUE)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(487, Short.MAX_VALUE))
         );
 
         gamesMenu.setMnemonic('f');
@@ -249,8 +262,14 @@ public class MainWindowForm extends javax.swing.JFrame {
         addCashFromXMLForm.setVisible(true);
     }//GEN-LAST:event_addCashFromFileMenuActionPerformed
 
-    public void showAvailableItens() {
-        if (userLogged.isIsAdm()) {
+    private void userLoggedActions(){
+        userLogged = UserConnected.getUser();
+        usernameLabel.setText(userLogged.getUsername());
+        showAvailableItens();
+    }
+    
+    private void showAvailableItens() {
+        if (userLogged.isAdm()) {
             // ADM itens
         }
         // Normal itens
@@ -267,12 +286,14 @@ public class MainWindowForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem gameCreateMenuItem;
     private javax.swing.JMenu gamesMenu;
     private javax.swing.JMenuItem gamesMenuItem;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JDesktopPane mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem publishersListMenuItem;
     private javax.swing.JMenu publishersMenu;
     private javax.swing.JMenuItem storeMenuItem;
     private javax.swing.JMenu userMenu;
+    private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 
 }
