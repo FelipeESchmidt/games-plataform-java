@@ -7,11 +7,14 @@ import games.platform.fitters.GamesFitter;
 import games.platform.logger.AppLogger;
 import games.platform.models.Client;
 import games.platform.models.Game;
+import games.platform.models.User;
 import games.platform.utils.DbGlobal;
 import games.platform.utils.LoggerGlobal;
+import games.platform.utils.UserConnected;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class StoreForm extends javax.swing.JInternalFrame {
 
@@ -22,11 +25,14 @@ public class StoreForm extends javax.swing.JInternalFrame {
     
     private Client selectedClient;
     private Game selectedGame;
+    
+    private User userLogged;
 
     public StoreForm() {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         try{
             db = DbGlobal.getDb();
+            userLogged = UserConnected.getUser();
             initComponents();
             populateComboBoxes();
         }catch(IllegalStateException e){
@@ -36,7 +42,10 @@ public class StoreForm extends javax.swing.JInternalFrame {
     
     public void populateComboBoxes() {
         try {
-            this.clients = ClientsFitter.getAllClients(db.getConnection());
+            if(userLogged.isAdm()){
+                this.clients = ClientsFitter.getAllClients(db.getConnection());
+            }
+            this.clients = new ArrayList<>(Arrays.asList(userLogged.getClient()));
             this.clients.forEach((client) -> clientsComboBox.addItem(client.getName()));
             this.games = GamesFitter.getAllGames(db.getConnection());
             this.games.forEach((game) -> gamesComboBox.addItem(game.getName()));

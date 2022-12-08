@@ -73,7 +73,7 @@ INSERT INTO user (username, password, client_id)
 VALUES
   ("Felipe","12345",1),
   ("Dionatan","54321",2),
-  ("Rogers","90856",3),
+  ("teste","123",3),
   ("Best","29716",4),
   ("Ruiz","54091",5),
   ("Camacho","80969",6),
