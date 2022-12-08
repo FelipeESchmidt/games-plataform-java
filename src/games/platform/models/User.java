@@ -6,14 +6,14 @@ public class User {
     private String username;
     private String password;
     private boolean is_adm;
-    private final int client_id;
+    private final Client client;
 
-    public User(int id, String username, String password, boolean is_adm, int client_id) {
+    public User(int id, String username, String password, boolean is_adm, Client client) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.is_adm = is_adm;
-        this.client_id = client_id;
+        this.client = client;
     }
 
     /**
@@ -80,11 +80,11 @@ public class User {
     }
     
     /**
-     * Get the value of client_id
+     * Get the value of client
      *
-     * @return the value of client_id
+     * @return the value of client
      */
-    public int getClientId() {
-        return client_id;
+    public Client getClient() {
+        return client;
     }
 }
