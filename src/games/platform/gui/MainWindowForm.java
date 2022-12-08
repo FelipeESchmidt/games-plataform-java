@@ -31,6 +31,8 @@ public class MainWindowForm extends javax.swing.JFrame {
         mainPanel = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
         usernameLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        clientNameLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         gamesMenu = new javax.swing.JMenu();
         gamesMenuItem = new javax.swing.JMenuItem();
@@ -39,11 +41,11 @@ public class MainWindowForm extends javax.swing.JFrame {
         publishersMenu = new javax.swing.JMenu();
         publishersListMenuItem = new javax.swing.JMenuItem();
         createPublisherMenuItem = new javax.swing.JMenuItem();
-        userMenu = new javax.swing.JMenu();
+        usersMenu = new javax.swing.JMenu();
         clientsMenuItem = new javax.swing.JMenuItem();
         clientsWithGamesMenuItem = new javax.swing.JMenuItem();
         createClientMenuItem = new javax.swing.JMenuItem();
-        buysToXMLMenu = new javax.swing.JMenu();
+        xmlMenu = new javax.swing.JMenu();
         buysToXMLMenuItem = new javax.swing.JMenuItem();
         addCashFromFileMenu = new javax.swing.JMenuItem();
 
@@ -53,8 +55,12 @@ public class MainWindowForm extends javax.swing.JFrame {
 
         jLabel1.setText("Usuário logado:");
 
+        jLabel2.setText("Nome:");
+
         mainPanel.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         mainPanel.setLayer(usernameLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mainPanel.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mainPanel.setLayer(clientNameLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -62,9 +68,15 @@ public class MainWindowForm extends javax.swing.JFrame {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clientNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(479, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
@@ -74,7 +86,11 @@ public class MainWindowForm extends javax.swing.JFrame {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(487, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(clientNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(459, Short.MAX_VALUE))
         );
 
         gamesMenu.setMnemonic('f');
@@ -127,8 +143,8 @@ public class MainWindowForm extends javax.swing.JFrame {
 
         menuBar.add(publishersMenu);
 
-        userMenu.setMnemonic('h');
-        userMenu.setText("User Profile");
+        usersMenu.setMnemonic('h');
+        usersMenu.setText("Users Profile");
 
         clientsMenuItem.setText("List");
         clientsMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +152,7 @@ public class MainWindowForm extends javax.swing.JFrame {
                 clientsMenuItemActionPerformed(evt);
             }
         });
-        userMenu.add(clientsMenuItem);
+        usersMenu.add(clientsMenuItem);
 
         clientsWithGamesMenuItem.setLabel("List with Games");
         clientsWithGamesMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +160,7 @@ public class MainWindowForm extends javax.swing.JFrame {
                 clientsWithGamesMenuItemActionPerformed(evt);
             }
         });
-        userMenu.add(clientsWithGamesMenuItem);
+        usersMenu.add(clientsWithGamesMenuItem);
 
         createClientMenuItem.setText("Create");
         createClientMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -152,11 +168,11 @@ public class MainWindowForm extends javax.swing.JFrame {
                 createClientMenuItemActionPerformed(evt);
             }
         });
-        userMenu.add(createClientMenuItem);
+        usersMenu.add(createClientMenuItem);
 
-        menuBar.add(userMenu);
+        menuBar.add(usersMenu);
 
-        buysToXMLMenu.setText("XML");
+        xmlMenu.setText("XML");
 
         buysToXMLMenuItem.setText("Buys to XML");
         buysToXMLMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +180,7 @@ public class MainWindowForm extends javax.swing.JFrame {
                 buysToXMLMenuItemActionPerformed(evt);
             }
         });
-        buysToXMLMenu.add(buysToXMLMenuItem);
+        xmlMenu.add(buysToXMLMenuItem);
 
         addCashFromFileMenu.setText("Add cash from File");
         addCashFromFileMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -172,9 +188,9 @@ public class MainWindowForm extends javax.swing.JFrame {
                 addCashFromFileMenuActionPerformed(evt);
             }
         });
-        buysToXMLMenu.add(addCashFromFileMenu);
+        xmlMenu.add(addCashFromFileMenu);
 
-        menuBar.add(buysToXMLMenu);
+        menuBar.add(xmlMenu);
 
         setJMenuBar(menuBar);
 
@@ -265,20 +281,23 @@ public class MainWindowForm extends javax.swing.JFrame {
     private void userLoggedActions(){
         userLogged = UserConnected.getUser();
         usernameLabel.setText(userLogged.getUsername());
+        clientNameLabel.setText(userLogged.getClient().getName());
         showAvailableItens();
     }
     
     private void showAvailableItens() {
-        if (userLogged.isAdm()) {
-            // ADM itens
+        if (!userLogged.isAdm()) {
+            gameCreateMenuItem.setVisible(false);
+            createPublisherMenuItem.setVisible(false);
+            usersMenu.setVisible(false);
+            xmlMenu.setVisible(false);
         }
-        // Normal itens
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem addCashFromFileMenu;
-    private javax.swing.JMenu buysToXMLMenu;
     private javax.swing.JMenuItem buysToXMLMenuItem;
+    private javax.swing.JLabel clientNameLabel;
     private javax.swing.JMenuItem clientsMenuItem;
     private javax.swing.JMenuItem clientsWithGamesMenuItem;
     private javax.swing.JMenuItem createClientMenuItem;
@@ -287,13 +306,15 @@ public class MainWindowForm extends javax.swing.JFrame {
     private javax.swing.JMenu gamesMenu;
     private javax.swing.JMenuItem gamesMenuItem;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JDesktopPane mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem publishersListMenuItem;
     private javax.swing.JMenu publishersMenu;
     private javax.swing.JMenuItem storeMenuItem;
-    private javax.swing.JMenu userMenu;
     private javax.swing.JLabel usernameLabel;
+    private javax.swing.JMenu usersMenu;
+    private javax.swing.JMenu xmlMenu;
     // End of variables declaration//GEN-END:variables
 
 }
