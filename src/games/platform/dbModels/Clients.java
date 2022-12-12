@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Clients {
-
+    
     /**
      * Get the query string to get all clients
      *
@@ -32,6 +32,21 @@ public class Clients {
      */
     public static String getClientsWithGames(int clientId) {
         return getClientsWithGames().concat(" WHERE client.id = " + clientId);
+    }
+    
+    /**
+     * Get the PreparedStatement to get client
+     *
+     * @param clientId client id to get client
+     * @param dbConnection database Connection
+     * @return PreparedStatement to decrease client balance
+     */
+    public static PreparedStatement getClient(int clientId, Connection dbConnection) throws SQLException{
+        PreparedStatement pstmt = dbConnection.prepareStatement("SELECT id, name, balance FROM client WHERE id = ?");
+
+        pstmt.setFloat(1, clientId);
+        
+        return pstmt;
     }
     
     /**

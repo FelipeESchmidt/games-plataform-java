@@ -10,6 +10,16 @@ create table client (
     PRIMARY KEY(id)
 );
 
+create table user (
+	id INT NOT NULL	auto_increment,
+	username  VARCHAR(50) not null,
+  password VARCHAR(255) not null,
+  client_id int not null,
+  is_adm boolean DEFAULT 0,
+    PRIMARY KEY(id),
+    FOREIGN KEY (client_id) REFERENCES client(id)
+);
+
 create table publisher (
 	id INT NOT NULL	auto_increment,
 	name  VARCHAR(50),
@@ -38,8 +48,8 @@ create table buy (
 
 INSERT INTO client (id, name, balance)
 VALUES
-  (1,"Meghan Howell",1476),
-  (2,"Tucker Chan",1229),
+  (1,"Felipe Schmidt",5555),
+  (2,"Dionatan Tietzmann",1229),
   (3,"Uriel Guthrie",3165),
   (4,"Yuli Dale",112),
   (5,"Kyla Bentley",1259),
@@ -58,6 +68,31 @@ VALUES
   (18,"Fitzgerald Flores",1848),
   (19,"Gary Mejia",4979),
   (20,"Kane Jennings",873);
+
+INSERT INTO user (username, password, client_id)
+VALUES
+  ("Felipe","12345",1),
+  ("Dionatan","54321",2),
+  ("teste","123",3),
+  ("Best","29716",4),
+  ("Ruiz","54091",5),
+  ("Camacho","80969",6),
+  ("Byrd","43118",7),
+  ("Thompson","54059",8),
+  ("Mcbride","27638",9),
+  ("Mccray","18280",10),
+  ("Burke","63263",11),
+  ("Vaughan","69861",12),
+  ("Clements","79914",13),
+  ("Abbott","95958",14),
+  ("French","45446",15),
+  ("Chandler","69699",16),
+  ("Donaldson","74789",17),
+  ("Lynn","95898",18),
+  ("Alvarado","96107",19),
+  ("Hale","41275",20);
+
+UPDATE user SET is_adm = 1 WHERE id in (1, 2);
 
 INSERT INTO publisher (id,name)
 VALUES
