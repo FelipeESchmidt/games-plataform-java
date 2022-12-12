@@ -23,6 +23,7 @@ public class UserConnectedTest {
     
     @Before
     public void setUp() {
+        UserConnected.setUser(null);
     }
     
     @After
