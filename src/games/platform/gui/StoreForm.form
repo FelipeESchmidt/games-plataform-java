@@ -31,17 +31,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="messageLabel" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel3" pref="201" max="32767" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="71" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="balanceAvailableLabel" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" pref="201" max="32767" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
                           <Component id="clientsComboBox" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="158" max="32767" attributes="0"/>
@@ -52,6 +53,7 @@
                               <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                               <Component id="buyGameButton" min="-2" pref="118" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="gameValueLabel" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                   </Group>
@@ -80,7 +82,12 @@
                       <Component id="clientsComboBox" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="212" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="gameValueLabel" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="balanceAvailableLabel" min="-2" pref="25" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="169" max="32767" attributes="0"/>
               <Component id="messageLabel" min="-2" pref="34" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
           </Group>
@@ -138,6 +145,10 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="messageLabel">
+    </Component>
+    <Component class="javax.swing.JLabel" name="gameValueLabel">
+    </Component>
+    <Component class="javax.swing.JLabel" name="balanceAvailableLabel">
     </Component>
   </SubComponents>
 </Form>

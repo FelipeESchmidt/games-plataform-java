@@ -19,39 +19,52 @@ import java.util.Arrays;
 public class StoreForm extends javax.swing.JInternalFrame {
 
     DataBase db;
-    
+
+    private final String baseBalanceText = "Saldo: ";
+    private final String baseValueText = "Valor: ";
+
     private ArrayList<Client> clients;
     private ArrayList<Game> games;
-    
+
     private Client selectedClient;
     private Game selectedGame;
-    
+
     private User userLogged;
 
     public StoreForm() {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-        try{
+        try {
             db = DbGlobal.getDb();
             userLogged = UserConnected.getUser();
             initComponents();
             populateComboBoxes();
-        }catch(IllegalStateException e){
+        } catch (IllegalStateException e) {
             LoggerGlobal.getLogger().addLog(AppLogger.getSevereLevel(), "Erro ao conectar o Banco de Dados. " + e.getMessage());
         }
     }
-    
+
     public void populateComboBoxes() {
         try {
-            if(userLogged.isAdm()){
+            if (userLogged.isAdm()) {
                 this.clients = ClientsFitter.getAllClients(db.getConnection());
+            } else {
+                this.clients = new ArrayList<>(Arrays.asList(userLogged.getClient()));
             }
-            this.clients = new ArrayList<>(Arrays.asList(userLogged.getClient()));
             this.clients.forEach((client) -> clientsComboBox.addItem(client.getName()));
             this.games = GamesFitter.getAllGames(db.getConnection());
             this.games.forEach((game) -> gamesComboBox.addItem(game.getName()));
         } catch (SQLException e) {
             LoggerGlobal.getLogger().addLog(AppLogger.getSevereLevel(), "Erro ao conectar o Banco de Dados. " + e.getMessage());
-        }        
+        }
+    }
+
+    public void populateLabels() {
+        if (selectedClient != null) {
+            balanceAvailableLabel.setText(baseBalanceText + selectedClient.getBalance());
+        }
+        if (selectedGame != null) {
+            gameValueLabel.setText(baseValueText + selectedGame.getPrice());
+        }
     }
 
     /**
@@ -70,6 +83,8 @@ public class StoreForm extends javax.swing.JInternalFrame {
         gamesComboBox = new javax.swing.JComboBox<>();
         buyGameButton = new javax.swing.JButton();
         messageLabel = new javax.swing.JLabel();
+        gameValueLabel = new javax.swing.JLabel();
+        balanceAvailableLabel = new javax.swing.JLabel();
 
         setBorder(null);
         setMaximizable(true);
@@ -112,17 +127,19 @@ public class StoreForm extends javax.swing.JInternalFrame {
                         .addComponent(messageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(clientsComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(balanceAvailableLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(clientsComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(gamesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(110, 110, 110)
-                                .addComponent(buyGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(buyGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(gameValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(56, 56, 56))))
         );
         layout.setVerticalGroup(
@@ -142,7 +159,11 @@ public class StoreForm extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(clientsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(gameValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(balanceAvailableLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
                 .addComponent(messageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(131, 131, 131))
         );
@@ -153,11 +174,13 @@ public class StoreForm extends javax.swing.JInternalFrame {
     private void clientsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientsComboBoxActionPerformed
         int selectedItem = clientsComboBox.getSelectedIndex();
         this.selectedClient = this.clients.get(selectedItem);
+        populateLabels();
     }//GEN-LAST:event_clientsComboBoxActionPerformed
 
     private void gamesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gamesComboBoxActionPerformed
         int selectedItem = gamesComboBox.getSelectedIndex();
         this.selectedGame = this.games.get(selectedItem);
+        populateLabels();
     }//GEN-LAST:event_gamesComboBoxActionPerformed
 
     private void buyGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyGameButtonActionPerformed
@@ -169,8 +192,10 @@ public class StoreForm extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel balanceAvailableLabel;
     private javax.swing.JButton buyGameButton;
     private javax.swing.JComboBox<String> clientsComboBox;
+    private javax.swing.JLabel gameValueLabel;
     private javax.swing.JComboBox<String> gamesComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
